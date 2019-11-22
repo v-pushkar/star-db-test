@@ -36,7 +36,7 @@ export default class SwapiService {
   }
   _extractId(item) {
     const idRegExp = /\/([0-9]*)\/$/;
-    console.log("item", item);
+    // console.log("item", item);
     return item.url.match(idRegExp)[1];
   }
 
@@ -69,8 +69,9 @@ export default class SwapiService {
       id: this._extractId(person),
       name: person.name,
       gender: person.gender,
-      birthYear: person.birthYear,
-      eyeColor: person.eyeColor
+      birthYear: person.birth_year,
+      eye_color: person.eye_color,
+      hair_color: person.hair_color
     };
   };
 }

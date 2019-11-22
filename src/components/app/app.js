@@ -5,18 +5,30 @@ import Itemlist from "./../item-list";
 import Planetdetiles from "./../planet-detiles";
 import Persondetiles from "./../person-detiles";
 import Spaceshipdetiles from "./../starship-detiles";
+import ErrorIndicator from "./../errorIndicator";
 
 class App extends Component {
   state = {
-    selectedPerson: null
+    selectedPerson: null,
+    hasError: false
   };
 
   onPersonSelected = id => {
     this.setState({
       selectedPerson: id
+      // hasError: true
     });
   };
+  componentDidCatch() {
+    console.error("componentDidCatch");
+    this.setState({
+      hasError: true
+    });
+  }
   render() {
+    if (this.state.hasError) {
+      return <ErrorIndicator />;
+    }
     return (
       <div>
         <Header />
@@ -27,9 +39,9 @@ class App extends Component {
               <Itemlist onItemSelected={this.onPersonSelected} />
             </div>
             <div className="col-lg-8 col-md-7 colsm-12">
-              <Planetdetiles
+              <Persondetiles
                 personId={this.state.selectedPerson}
-              ></Planetdetiles>
+              ></Persondetiles>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ const PlanetVieu = ({ planet }) => {
   const { id, name, population, rotationPeriod, diameter, climate } = planet;
   return (
     <div className="row">
-      <div className="col-4">
+      <div className="col-lg-4 col-md-4 sol-sm-12">
         <div className="img-wrapp">
           <img
             src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
@@ -12,7 +12,7 @@ const PlanetVieu = ({ planet }) => {
           />
         </div>
       </div>
-      <div className="col-8">
+      <div className="col-lg-8 col-md-8 sol-sm-12">
         <div className="planet-description">
           <h4>{name}</h4>
           <ul className="list-group">

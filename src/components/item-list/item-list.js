@@ -18,9 +18,7 @@ export default class ItemList extends Component {
       });
     });
   }
-  personOnItemSelect(id) {
-    console.log("Item clicked", id);
-  }
+ 
   renderItems = arr => {
     // console.log("Arr", arr);
     return arr.map(person => {
@@ -28,7 +26,7 @@ export default class ItemList extends Component {
         <li
           key={person.id}
           className="list-group-item list-group-item-action"
-          onClick={() => this.personOnItemSelect(person.id)}
+          onClick={() => this.props.onItemSelected(person.id)}
         >
           {person.name}
         </li>
