@@ -28,7 +28,7 @@ export default class PersonDetiles extends Component {
       return;
     }
     this.swapiSerwice.getPerson(personId).then(person => {
-      console.log("person", person);
+      // console.log("person", person);
       this.setState({ person, loading: false });
     });
   }

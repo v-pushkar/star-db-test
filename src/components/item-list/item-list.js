@@ -6,19 +6,20 @@ import Spiner from "./../spiner";
 export default class ItemList extends Component {
   swapiSerice = new SwapiService();
   state = {
-    peopleList: null,
+    itemsList: null,
     loading: true
   };
 
   componentDidMount() {
-    this.swapiSerice.getAllPeople().then(peopleList => {
+    const { getData } = this.props;   
+    getData().then(itemsList => {
       this.setState({
-        peopleList,
+        itemsList,
         loading: false
       });
     });
   }
- 
+
   renderItems = arr => {
     // console.log("Arr", arr);
     return arr.map(person => {
@@ -34,12 +35,12 @@ export default class ItemList extends Component {
     });
   };
   render() {
-    const { peopleList, loading } = this.state;
+    const { itemsList, loading } = this.state;
     if (loading) {
       return <Spiner />;
     }
 
-    const items = this.renderItems(peopleList);
+    const items = this.renderItems(itemsList);
 
     return (
       <div className="item-list-wrapp">

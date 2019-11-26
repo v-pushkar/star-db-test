@@ -6,8 +6,16 @@ import Planetdetiles from "./../planet-detiles";
 import Persondetiles from "./../person-detiles";
 import Spaceshipdetiles from "./../starship-detiles";
 import ErrorIndicator from "./../errorIndicator";
+import PeoplePage from "./../people-page";
+import StarshipPage from "./../starships-page";
+import PlanetsPage from "./../planet-page";
+import Row from "./../row/row";
+import ItemDetiles from "./../item-detiles";
+import PersonDetiles from "./../person-detiles";
+import SwapiService from "./../../services/swapi-service";
 
 class App extends Component {
+  swapiSerwice = new SwapiService();
   state = {
     selectedPerson: null,
     hasError: false
@@ -29,21 +37,31 @@ class App extends Component {
     if (this.state.hasError) {
       return <ErrorIndicator />;
     }
+    const {
+      getPerson,
+      getStarship,
+      getPersonImg,
+      getStarShipImg
+    } = this.swapiSerwice;
+    const personDetiles = (
+      <ItemDetiles itemId={11} getData={getPerson} getImgUrl={getPersonImg} />
+    );
+    const starshipDitales = (
+      <ItemDetiles
+        itemId={5}
+        getData={getStarship}
+        getImgUrl={getStarShipImg}
+      />
+    );
     return (
       <div>
         <Header />
         <div className="container">
-          <Randomplanet />
-          <div className="row">
-            <div className="col-lg-4 col-md-5 col-sm-12">
-              <Itemlist onItemSelected={this.onPersonSelected} />
-            </div>
-            <div className="col-lg-8 col-md-7 colsm-12">
-              <Persondetiles
-                personId={this.state.selectedPerson}
-              ></Persondetiles>
-            </div>
-          </div>
+          {/* <Randomplanet /> */}
+          <Row left={personDetiles} right={starshipDitales} />
+          {/* <PeoplePage />
+          <StarshipPage />
+          <PlanetsPage /> */}
         </div>
       </div>
     );
