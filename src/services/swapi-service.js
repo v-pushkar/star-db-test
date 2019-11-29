@@ -42,11 +42,11 @@ export default class SwapiService {
     return `${this._imgBase}/starships/${id}.jpg`;
   };
   getPlanetImg = ({ id }) => {
-    return `${this._imgBase}/starships/${id}.jpg`;
+    return `${this._imgBase}/planets/${id}.jpg`;
   };
   _extractId(item) {
     const idRegExp = /\/([0-9]*)\/$/;
-    console.log("item", item);
+    // console.log("item", item);
     return item.url.match(idRegExp)[1];
   }
 
@@ -67,11 +67,11 @@ export default class SwapiService {
       name: starship.name,
       model: starship.model,
       manufacturer: starship.manufacturer,
-      constInCredits: starship.constInCredits,
+      constInCredits: starship.cost_in_credits,
       length: starship.length,
       crew: starship.crew,
-      pasengers: starship.pasengers,
-      cargoCapacity: starship.cargoCapacity
+      passengers: starship.passengers,
+      cargoCapacity: starship.cargo_capacity
     };
   };
   _transformPeople = person => {

@@ -1,1 +1,1 @@
-export { default } from './item-detiles';
+export { default, Records } from "./item-detiles";

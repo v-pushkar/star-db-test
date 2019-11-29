@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Itemlist from "./../item-list";
 import SwapiService from "./../../services/swapi-service";
-import Spiner from "./../spiner";
 import Persondetiles from "./../person-detiles";
 import ErrorBoundry from "./../error-boundry";
 import ErrrorBtn from "./../error-btn";
@@ -10,7 +9,7 @@ import Row from "./../row/row";
 class PeoplePage extends Component {
   swapiSerice = new SwapiService();
   state = {
-    selectedItem: 14
+    selectedItem: 5
   };
 
   onItemSelected = id => {

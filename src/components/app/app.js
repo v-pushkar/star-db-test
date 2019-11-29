@@ -10,9 +10,23 @@ import PeoplePage from "./../people-page";
 import StarshipPage from "./../starships-page";
 import PlanetsPage from "./../planet-page";
 import Row from "./../row/row";
-import ItemDetiles from "./../item-detiles";
+// import ItemDetiles, { Records } from "./../item-detiles";
 import PersonDetiles from "./../person-detiles";
+import ErrorBoundry from "./../error-boundry";
 import SwapiService from "./../../services/swapi-service";
+import {
+  SwapiServiceProvider,
+  SwapiServiceConsumer
+} from "./../swapi-servise-context";
+
+import {
+  PersonDetails,
+  StarshippDetails,
+  PlanetDetails,
+  PersonList,
+  StarshippList,
+  PlanetList
+} from "./../sw-components";
 
 class App extends Component {
   swapiSerwice = new SwapiService();
@@ -43,27 +57,24 @@ class App extends Component {
       getPersonImg,
       getStarShipImg
     } = this.swapiSerwice;
-    const personDetiles = (
-      <ItemDetiles itemId={11} getData={getPerson} getImgUrl={getPersonImg} />
-    );
-    const starshipDitales = (
-      <ItemDetiles
-        itemId={5}
-        getData={getStarship}
-        getImgUrl={getStarShipImg}
-      />
-    );
+
     return (
-      <div>
-        <Header />
-        <div className="container">
-          {/* <Randomplanet /> */}
-          <Row left={personDetiles} right={starshipDitales} />
-          {/* <PeoplePage />
-          <StarshipPage />
-          <PlanetsPage /> */}
-        </div>
-      </div>
+      <ErrorBoundry>
+        <SwapiServiceProvider value={this.swapiSerwice}>
+          <Header />
+          <div className="container">
+            <Randomplanet />
+            <Row
+              left={<PersonDetails itemId={5} />}
+              right={<StarshippDetails itemId={15} />}
+            />
+            <PlanetDetails itemId={15} />
+            <PersonList />
+            <PlanetList />
+            <StarshippList />
+          </div>
+        </SwapiServiceProvider>
+      </ErrorBoundry>
     );
   }
 }

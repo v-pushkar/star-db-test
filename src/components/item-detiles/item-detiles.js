@@ -2,7 +2,16 @@ import React, { Component } from "react";
 import "./item-detiles.scss";
 import SwapiService from "./../../services/swapi-service";
 import Spiner from "./../spiner";
-import ItemCard from "./_ItemCard";
+
+const Records = ({ item, field, label }) => {
+  return (
+    <li className="list-group-item d-flex justify-content-between align-items-center">
+      {label}:<span>{item[field]}</span>
+    </li>
+  );
+};
+
+export { Records };
 
 class ItemDetiles extends Component {
   swapiSerwice = new SwapiService();
@@ -34,16 +43,26 @@ class ItemDetiles extends Component {
   }
   render() {
     if (!this.state.item) {
-      return (
-        <div className="item-det-wrapp">
-          <span>Select a item from itemlist</span>
-        </div>
-      );
+      return <Spiner />;
     }
     const { loading, item, image } = this.state;
     const spiner = loading ? <Spiner /> : null;
     const itemCard = !loading ? (
-      <ItemCard person={this.state.item} img={image} />
+      <div className="row">
+        <div className="col-5">
+          <div className="img-wrapp">
+            <img src={image} />
+          </div>
+        </div>
+        <div className="col-7">
+          <h3>{item.name}</h3>
+          <ul className="list-group">
+            {React.Children.map(this.props.children, child => {
+              return React.cloneElement(child, { item });
+            })}
+          </ul>
+        </div>
+      </div>
     ) : null;
 
     return (
@@ -54,5 +73,7 @@ class ItemDetiles extends Component {
     );
   }
 }
+
+
 
 export default ItemDetiles;
