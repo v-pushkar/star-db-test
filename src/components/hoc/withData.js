@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Spiner from "./../spiner";
-import ErrorIndicator from "./../errorIndicator";
+import Spiner from "../spiner";
+import ErrorIndicator from "../errorIndicator";
 
-const addData = (View, getData) => {
+const withData = (View) => {
   return class extends Component {
     state = {
       data: null,
@@ -11,7 +11,7 @@ const addData = (View, getData) => {
     };
 
     componentDidMount() {
-      getData().then(data => {
+      this.props.getData().then(data => {
         this.setState({
           data,
           loading: false
@@ -23,9 +23,7 @@ const addData = (View, getData) => {
         isError: true
       });
     }
-    // const loading = this.state.loading? <Spiner/> : null;
-    // const haserror = this.state.hasError ? <ErrorIndicator/> : null;
-
+    
     render() {
       const { data, hasError } = this.state;
       if (!data) {
@@ -39,4 +37,4 @@ const addData = (View, getData) => {
   };
 };
 
-export default addData;
+export default withData;

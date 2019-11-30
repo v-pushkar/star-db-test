@@ -55,6 +55,11 @@ class Header extends Component {
                 </a>
               </li>
             </ul>
+            <button 
+            className="btn btn-primary btn-sm" 
+            onClick={this.props.onServiceChange}
+            >Change services
+            </button>
           </div>
         </div>
       </nav>

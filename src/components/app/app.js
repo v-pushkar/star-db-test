@@ -14,6 +14,7 @@ import Row from "./../row/row";
 import PersonDetiles from "./../person-detiles";
 import ErrorBoundry from "./../error-boundry";
 import SwapiService from "./../../services/swapi-service";
+import DummySwapiService from "./../../services/dummy-swapi-service";
 import {
   SwapiServiceProvider,
   SwapiServiceConsumer
@@ -29,10 +30,12 @@ import {
 } from "./../sw-components";
 
 class App extends Component {
-  swapiSerwice = new SwapiService();
+  // swapiSerwice = new SwapiService();
+  // swapiSerwice = new DummySwapiService();
   state = {
     selectedPerson: null,
-    hasError: false
+    hasError: false,
+    swapiSerwice : new DummySwapiService()
   };
 
   onPersonSelected = id => {
@@ -46,6 +49,16 @@ class App extends Component {
     this.setState({
       hasError: true
     });
+  };
+  onServiceChange = ()=>{
+    this.setState(({swapiSerwice})=> {
+      const Service = swapiSerwice instanceof SwapiService ? DummySwapiService : SwapiService;
+      console.log("onServiceChange swiched to:", Service.name);
+    return {
+      swapiSerwice: new Service()
+    }
+    })
+    
   }
   render() {
     if (this.state.hasError) {
@@ -56,19 +69,19 @@ class App extends Component {
       getStarship,
       getPersonImg,
       getStarShipImg
-    } = this.swapiSerwice;
+    } = this.state.swapiSerwice;
 
     return (
       <ErrorBoundry>
-        <SwapiServiceProvider value={this.swapiSerwice}>
-          <Header />
+        <SwapiServiceProvider value={this.state.swapiSerwice}>
+          <Header onServiceChange={this.onServiceChange}/>
           <div className="container">
-            <Randomplanet />
+            {/* <Randomplanet /> */}
             <Row
-              left={<PersonDetails itemId={5} />}
-              right={<StarshippDetails itemId={15} />}
+              left={<PersonDetails itemId={1} />}
+              right={<StarshippDetails itemId={3} />}
             />
-            <PlanetDetails itemId={15} />
+            <PlanetDetails itemId={1} />
             <PersonList />
             <PlanetList />
             <StarshippList />

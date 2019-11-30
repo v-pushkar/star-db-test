@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./item-detiles.scss";
 import SwapiService from "./../../services/swapi-service";
 import Spiner from "./../spiner";
+import DummySwapiService from "./../../services/dummy-swapi-service";
 
 const Records = ({ item, field, label }) => {
   return (
@@ -14,6 +15,7 @@ const Records = ({ item, field, label }) => {
 export { Records };
 
 class ItemDetiles extends Component {
+  // swapiSerwice = new  DummySwapiService();
   swapiSerwice = new SwapiService();
   state = {
     item: null,
@@ -24,7 +26,7 @@ class ItemDetiles extends Component {
     this.updateitem();
   }
   componentDidUpdate(prevProps) {
-    if (this.props.itemId !== prevProps.itemId) {
+    if (this.props.itemId !== prevProps.itemId || this.props.getData !== prevProps.getData) {
       this.updateitem();
       this.setState({
         loading: true
