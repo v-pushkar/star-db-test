@@ -1,7 +1,7 @@
-import React from "react";
+
 import ItemList from "./../item-list";
 import { withData, withSwapiService } from "./../hoc";
-import SwapiService from "../../services/swapi-service";
+
 
 const mapPersonMethodsToProps = swapiService => {
     return {
@@ -25,3 +25,4 @@ const StarshippList = withSwapiService(withData(ItemList), mapStarshipMethodsToP
 const PlanetList = withSwapiService(withData(ItemList), mapPlanetMethodsToProps);
 
 export { PersonList, StarshippList, PlanetList };
+ 

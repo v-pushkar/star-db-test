@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./errorIndicator.scss";
 import ds_ikon from "./deth-star.png";
 

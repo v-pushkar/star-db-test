@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "./item-detiles.scss";
-import SwapiService from "./../../services/swapi-service";
+
 import Spiner from "./../spiner";
-import DummySwapiService from "./../../services/dummy-swapi-service";
 
 const Records = ({ item, field, label }) => {
   return (
@@ -15,8 +14,6 @@ const Records = ({ item, field, label }) => {
 export { Records };
 
 class ItemDetiles extends Component {
-  // swapiSerwice = new  DummySwapiService();
-  swapiSerwice = new SwapiService();
   state = {
     item: null,
     loading: false,
@@ -26,7 +23,11 @@ class ItemDetiles extends Component {
     this.updateitem();
   }
   componentDidUpdate(prevProps) {
-    if (this.props.itemId !== prevProps.itemId || this.props.getData !== prevProps.getData) {
+    if (
+      this.props.itemId !== prevProps.itemId ||
+      this.props.getData !== prevProps.getData ||
+      this.props.getImgUrl !== prevProps.getImgUrl
+    ) {
       this.updateitem();
       this.setState({
         loading: true
@@ -44,7 +45,16 @@ class ItemDetiles extends Component {
     });
   }
   render() {
-    if (!this.state.item) {
+    if (!this.state.item && !this.state.loading) {
+      return (
+        <div className="item-list-wrapp">
+          <div className="alert alert-primary" role="alert">
+  Select item, please!
+</div>
+        </div>
+        
+      );
+    } else if (this.state.loading) {
       return <Spiner />;
     }
     const { loading, item, image } = this.state;
@@ -53,7 +63,7 @@ class ItemDetiles extends Component {
       <div className="row">
         <div className="col-5">
           <div className="img-wrapp">
-            <img src={image} />
+            <img src={image} alt="item_el" />
           </div>
         </div>
         <div className="col-7">
@@ -75,7 +85,5 @@ class ItemDetiles extends Component {
     );
   }
 }
-
-
 
 export default ItemDetiles;

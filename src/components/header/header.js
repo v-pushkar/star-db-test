@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   state = {
@@ -16,9 +17,9 @@ class Header extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             StarWars API
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -39,26 +40,38 @@ class Header extends Component {
             id="navbarColor02"
           >
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <a className="nav-link" href="#">
+              <li className="nav-item">
+                <Link to="/people/" className="nav-link">
                   People <span className="sr-only">(current)</span>
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link to="/planets/" className="nav-link">
                   Planets
-                </a>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to="/starships/" className="nav-link">
+                  Starships
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Starships
-                </a>
+                <Link to="/secret" className="nav-link">
+                  SecretPage
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/login" className="nav-link">
+                  Login
+                </Link>
               </li>
             </ul>
-            <button 
-            className="btn btn-primary btn-sm" 
-            onClick={this.props.onServiceChange}
-            >Change services
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={this.props.onServiceChange}
+            >
+              Change services
             </button>
           </div>
         </div>
