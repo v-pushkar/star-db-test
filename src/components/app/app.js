@@ -77,8 +77,7 @@ class App extends Component {
                 <Route path="/starships" component={StarshipPage} exact />
                 <Route
                   path="/starships/:id"
-                  render={({ match, location, history }) => {
-                    // const { id } = match.params;
+                  render={({ match }) => {
                     console.log("match", match.params.id);
                     return <StarshippDetails itemId={match.params.id} />;
                   }}
